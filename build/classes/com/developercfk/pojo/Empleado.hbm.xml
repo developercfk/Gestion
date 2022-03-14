@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.developercfk.pojo.Empleado" table="empleado" catalog="gestionventas" optimistic-lock="version">
+        <id name="dni" type="string">
+            <column name="dni" length="15" />
+            <generator class="assigned" />
+        </id>
+        <property name="nombreUsuario" type="string">
+            <column name="nombre_usuario" length="45" not-null="true" />
+        </property>
+        <property name="contrasenaUsuario" type="string">
+            <column name="contrasena_usuario" length="45" not-null="true" />
+        </property>
+        <property name="fechaInicio" type="date">
+            <column name="fecha_inicio" length="10" not-null="true" />
+        </property>
+        <property name="nombreEmpleado" type="string">
+            <column name="nombre_empleado" length="45" not-null="true" />
+        </property>
+        <set name="administradors" table="administrador" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="dni_administrador" length="15" not-null="true" />
+            </key>
+            <one-to-many class="com.developercfk.pojo.Administrador" />
+        </set>
+        <set name="ventas" table="venta" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_empleado_fk" length="15" not-null="true" />
+            </key>
+            <one-to-many class="com.developercfk.pojo.Venta" />
+        </set>
+        <set name="cajeros" table="cajero" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="dni_cajero" length="15" not-null="true" />
+            </key>
+            <one-to-many class="com.developercfk.pojo.Cajero" />
+        </set>
+    </class>
+</hibernate-mapping>

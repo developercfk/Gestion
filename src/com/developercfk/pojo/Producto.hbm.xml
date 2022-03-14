@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.developercfk.pojo.Producto" table="producto" catalog="gestionventas" optimistic-lock="version">
+        <id name="idproducto" type="java.lang.Integer">
+            <column name="idproducto" />
+            <generator class="identity" />
+        </id>
+        <property name="categoria" type="string">
+            <column name="categoria" length="45" not-null="true" />
+        </property>
+        <property name="nombreProducto" type="string">
+            <column name="nombre_producto" length="45" not-null="true" unique="true" />
+        </property>
+        <property name="precioProducto" type="double">
+            <column name="precio_producto" precision="22" scale="0" not-null="true" />
+        </property>
+        <property name="stock" type="int">
+            <column name="stock" not-null="true" />
+        </property>
+        <set name="ventayproductos" table="ventayproducto" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_producto" not-null="true" />
+            </key>
+            <one-to-many class="com.developercfk.pojo.Ventayproducto" />
+        </set>
+    </class>
+</hibernate-mapping>
