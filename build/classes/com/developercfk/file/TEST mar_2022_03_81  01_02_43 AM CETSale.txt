@@ -1,0 +1,4 @@
+x1  Mahou  2.5 EUR
+x3  Amstel  5.4 EUR
+
+7.9 EUR

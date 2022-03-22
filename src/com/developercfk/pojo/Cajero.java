@@ -11,6 +11,10 @@ public class Cajero  implements java.io.Serializable {
 
     public Cajero() {
     }
+    
+    public Cajero(Empleado empleado){
+       this.empleado = empleado;
+    }
 
     public Cajero(int idcajero, Empleado empleado) {
        this.idcajero = idcajero;

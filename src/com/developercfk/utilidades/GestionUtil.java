@@ -1,6 +1,15 @@
 
 package com.developercfk.utilidades;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -162,7 +171,6 @@ public class GestionUtil {
         }
     }
     
-    
     public static void verificateDoubleFields(JTextField jtextfield){
         
         try {
@@ -176,4 +184,76 @@ public class GestionUtil {
         }
     }
    
+    public static void readFile(File file){
+        
+        String line;
+        
+        try {
+            
+            BufferedReader br = new BufferedReader( new FileReader(file) );
+            
+            while ( (line = br.readLine()) != null ) {                
+                
+                System.out.println(line);
+            }
+            
+            
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(GestionUtil.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(GestionUtil.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
+    
+    public static void writeFile(File file, String text,boolean append){
+       
+        BufferedWriter bw ;
+        try {
+            
+            bw = new BufferedWriter(new FileWriter(file,append));
+
+                if(file.length() == 0){
+                 
+                      bw.write(text);
+
+                  }else{
+
+                      bw.newLine();
+                      bw.write(text);
+
+                  }
+            bw.close();
+            
+            
+            
+        } catch (IOException ex) {
+            Logger.getLogger(GestionUtil.class.getName()).log(Level.SEVERE, null, ex);
+            
+        } 
+
+        
+    }
+
+    public static void createFile(File file){
+        
+        try {
+            boolean b = file.createNewFile();
+            
+            if(b){
+                
+                System.out.println("File Create...");
+            }else{
+                
+                System.out.println("File No Create...");
+            }
+            
+            
+        } catch (IOException ex) {
+           
+            System.err.println(ex.getMessage());
+        }
+    }
+
+
 }
